@@ -2,11 +2,12 @@
 
 A refereeing system using ML-driven computer vision to score fencing videos. Videos should include the equipment lights but no referee signs after the combat starts, and no sound.
 High level goals per iteration:
+1. Classify fencing images according to the weapon displayed (or into "non-fencing")
 1. Decide which fencer(s) get a point in single light touches, in any weapon.
-2. Recognize double touches in epee
-3. Recognize invalid touches in any weapon
-4. Assign points based on right-of-way in foil and saber
-5. Properly referee "simultaneous" actions at start of combat in saber
+1. Recognize double touches in epee
+1. Recognize invalid touches in any weapon
+1. Assign points based on right-of-way in foil and saber
+1. Properly referee "simultaneous" actions at start of combat in saber
 More goals may be added later.
 
 ## Motivation
