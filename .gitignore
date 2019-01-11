@@ -2,6 +2,7 @@
 data/**
 
 # Foundations (at least while using an open git repo)
+docker/foundations
 docker/foundations/**
 
 # Byte-compiled / optimized / DLL files
