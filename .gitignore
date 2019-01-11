@@ -1,6 +1,8 @@
 # Directory containing training & test data
 data/**
 
+# Foundations (at least while using an open git repo)
+docker/foundations/**
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
