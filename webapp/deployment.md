@@ -1,5 +1,7 @@
 #Deployment instructions
 
+Within your deployment environment, go through the following steps:
+
 1. Install requirements
 ~~~~
 $ python -m pip install -r requirements.txt
