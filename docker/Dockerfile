@@ -16,5 +16,8 @@ RUN pip install -U ./foundations/foundations_internal-0.0.9-py3-none-any.whl
 RUN pip install -U ./foundations/foundations_rest_api-0.0.9-py3-none-any.whl
 RUN pip install -U ./foundations/foundations_ssh-0.0.9-py3-none-any.whl
 
+# How do you map a port out of the container to host?
+# So this container can have access to Redis on another one.
+
 # Run <app.py> when the container launches or run container interactively
-# CMD ["python", "./<app.py>"]
+CMD ["python", "./driver.py"]
