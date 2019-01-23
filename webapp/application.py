@@ -18,11 +18,20 @@ def after_request(response):
 
 @app.route("/")
 def index():
-    """Show welcome message"""
+    """Shows welcome message"""
     return render_template("index.html")
 
-@app.route("/imagesHelp")
+@app.route("/imagesHelp", methods=["GET", "POST"])
 def imagesHelp():
+    """Randomly selects an image from database and receives label as input from user"""
+    if request.method == "GET":
+        #Random selection of an image, biased by current label volume
+
+
+        #Present image and wait for label
+        return render_template("pasdetouche.html")
+    else:
+        return redirect("/imagesHelp")
     return render_template("pasdetouche.html")
 
 @app.route("/clipsHelp")
