@@ -2,6 +2,9 @@
 data/clips/**
 
 
+# Support data
+credentials.log
+
 # Foundations (at least while using an open git repo)
 docker/foundations
 docker/foundations/**
