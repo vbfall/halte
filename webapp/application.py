@@ -21,6 +21,24 @@ def index():
     """Show welcome message"""
     return render_template("index.html")
 
+@app.route("/imagesHelp")
+def imagesHelp():
+    return render_template("pasdetouche.html")
+
+@app.route("/clipsHelp")
+def clipsHelp():
+    return render_template("pasdetouche.html")
+
+@app.route("/imagesApply")
+def imagesApply():
+    return render_template("pasdetouche.html")
+
+@app.route("/clipsApply")
+def clipsApply():
+    return render_template("pasdetouche.html")
+
+
+
 
 if __name__ == '__main__':
    app.run()
