@@ -1,6 +1,9 @@
 # Directory containing training & test data
 data/**
 
+# Support data
+credentials.log
+
 # Foundations (at least while using an open git repo)
 docker/foundations
 docker/foundations/**
