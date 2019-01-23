@@ -16,3 +16,8 @@ html, body {height: 100vh;}
     background-size: cover;
     color: #850000;
 }
+
+a:link {
+   color:inherit;
+   font-weight: bold;
+}

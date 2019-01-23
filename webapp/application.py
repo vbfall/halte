@@ -37,6 +37,9 @@ def imagesApply():
 def clipsApply():
     return render_template("pasdetouche.html")
 
+@app.route("/thanks")
+def thanks():
+    return render_template("pasdetouche.html")
 
 
 
