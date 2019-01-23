@@ -1,1 +1,1 @@
-web: gunicorn halte:application
+web: gunicorn application:app
