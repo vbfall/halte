@@ -1,5 +1,9 @@
 # Directory containing training & test data
-data/**
+data/clips/**
+
+
+# Support data
+credentials.log
 
 # Support data
 credentials.log
