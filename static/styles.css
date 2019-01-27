@@ -8,7 +8,9 @@ main .form-control
     width: auto;
 }
 
-html, body {height: 100vh;}
+html {height: 100vh;}
+
+body {height: 93%;}
 
 .text_message {
     height: 100%;
