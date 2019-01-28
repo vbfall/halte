@@ -1,7 +1,7 @@
 from flask import Flask, redirect, render_template, request
 import sqlite3
 import numpy
-from helpers import list_to_inverse_prob, query_db
+from helpers_web import list_to_inverse_prob, query_db
 
 # Configure application
 app = Flask(__name__)
@@ -9,8 +9,6 @@ app = Flask(__name__)
 # Following two blocks are for debugging:
 # Ensure templates are auto-reloaded
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-
-db = sqlite3.connect('halte.db')
 
 # Ensure responses aren't cached
 @app.after_request
@@ -33,15 +31,15 @@ def imagesHelp():
         # get full list of images
         """TODO: current method only gets images that have at least one label"""
         # Counts how many labels each image has (function returns results in lists)
-        images, counts = query_db(db,'SELECT image_id, COUNT(DISTINCT \"index\") FROM image_labels GROUP BY image_id')
+        images, counts = query_db('halte.db','SELECT image_id, COUNT(DISTINCT \"index\") FROM image_labels GROUP BY image_id')
         # turns list of counts into probabilities inversely proportional to current label volume
         probs = list_to_inverse_prob(counts)
         # Selects one image from list respecting probabilities in probs
-        selected_image = numpy.random.choice(images,1,probs)[0]
+        selected_image = numpy.random.choice(images,1,p=probs)[0]
 
         #Present image and wait for label
         """TODO: make new template and call it passing file name"""
-        return render_template('pasdetouche.html')
+        return render_template('imageHelp.html',image_name=(str(selected_image).zfill(12)+'.jpg'))
     else:
         """Receive label from user and enter it into image_labels table"""
         """TODO:"""
