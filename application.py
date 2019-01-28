@@ -1,7 +1,7 @@
 from flask import Flask, redirect, render_template, request
 import sqlite3
 import numpy
-from helpers import list_to_inverse_prob
+from helpers import list_to_inverse_prob, query_db
 
 # Configure application
 app = Flask(__name__)
@@ -32,13 +32,8 @@ def imagesHelp():
     if request.method == 'GET':
         # get full list of images
         """TODO: current method only gets images that have at least one label"""
-        # Counts how many labels each image has
-        db_cursor = db.cursor()
-        db_cursor.execute('SELECT image_id, COUNT(DISTINCT \"index\") FROM image_labels GROUP BY image_id')
-        results = db_cursor.fetchall()
-        # turns results into lists (Python's zip is its own inverse)
-        # '*' operator passes separated elements of each tuple
-        images, counts = zip(*results)
+        # Counts how many labels each image has (function returns results in lists)
+        images, counts = query_db(db,'SELECT image_id, COUNT(DISTINCT \"index\") FROM image_labels GROUP BY image_id')
         # turns list of counts into probabilities inversely proportional to current label volume
         probs = list_to_inverse_prob(counts)
         # Selects one image from list respecting probabilities in probs

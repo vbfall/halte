@@ -1,4 +1,13 @@
 import numpy
+import sqlite3
+
+def query_db(db, command_string):
+    """Receives a sqlite db object, executes a query on it as per command_string and returns results in format of lists - caller must know how many lists will be returned"""
+    cur = db.cursor()
+    cur.execute(command_string)
+    results = cur.fetchall()
+    return zip(*results)
+
 
 def list_to_inverse_prob(l):
     """Receives a list of positive values and returns a normalized numpy array with probabilities inverse to the lists values"""
