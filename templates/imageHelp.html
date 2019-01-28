@@ -11,17 +11,26 @@
     <div class="col-4 shrink bg-danger">user info
     </div>
 
-    <div class="col-sm bg-primary">
+    <div class="col-sm">
       <div class="row">
-        <div class="col-sm bg-success"><img src={{image_path}} class="img-fluid" alt="Image goes here">
+        <div class="col-sm"><img src={{image_path}} class="img-fluid" alt="Image goes here">
         </div>
         <div class="col-sm bg-secondary">Image meta data
         </div>
       </div>
       <div class="row">
-        <div class="col-sm bg-info">label buttons
+        <div class="col-sm">
+          <form action="/imagesHelp" method="post">
+            <button class="btn btn-primary" type="submit" value="epee">Epee</button>
+            <button class="btn btn-primary" type="submit" value="foil">Foil</button>
+            <button class="btn btn-primary" type="submit" value="sabre">Sabre</button>
+            <button class="btn btn-primary" type="submit" value="none">None</button>
+          </form>
         </div>
-        <div class="col-sm bg-warning">skip button
+        <div class="col-">
+          <form action="/imagesHelp" method="get">
+            <button class="btn btn-primary" type="submit">Skip</button>
+          </form>
         </div>
       </div>
     </div>
