@@ -5,26 +5,26 @@
 {% endblock %}
 
 {% block main %}
-  <div class="container-fluid">
-    <div class="row">
-      <!-- this perhaps should be a sidebar? -->
-      <div class="col-4 shrink bg-danger">user info
-      </div>
+<div class="container-fluid">
+  <div class="row">
+    <!-- this perhaps should be a sidebar? -->
+    <div class="col-4 shrink bg-danger">user info
+    </div>
 
-      <div class="col-sm bg-primary">
-        <div class="row">
-          <div class="col-sm bg-success">image is {{ image_name }}
-          </div>
-          <div class="col-sm bg-secondary">Image meta data
-          </div>
+    <div class="col-sm bg-primary">
+      <div class="row">
+        <div class="col-sm bg-success"><img src={{image_path}} class="img-fluid" alt="Image goes here">
         </div>
-        <div class="row">
-          <div class="col-sm bg-info">label buttons
-          </div>
-          <div class="col-sm bg-warning">skip button
-          </div>
+        <div class="col-sm bg-secondary">Image meta data
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm bg-info">label buttons
+        </div>
+        <div class="col-sm bg-warning">skip button
         </div>
       </div>
     </div>
   </div>
+</div>
 {% endblock %}

@@ -20,8 +20,10 @@ def list_to_inverse_prob(l):
     a = a / total
     return a
 
+
 def get_image_path(index):
     """Receives a file number without extension and returns the full path to it"""
-    file_list = os.listdir('./data/images')
-    path = './data/images/' + file_list[index]
+    path_to_images = '/static/image_data/'
+    file_list = os.listdir('.'+path_to_images)
+    path = path_to_images + file_list[index]
     return path
