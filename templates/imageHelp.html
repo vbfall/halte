@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Welcome!
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+  <div class="row">
+    <!-- this perhaps should be a sidebar? -->
+    <div class="col-sm shrink bg-secondary">user info
+    </div>
+
+    <div class="col-md-auto">
+      <div class="row">
+        <div class="col-md-auto"><img src={{image_path}} class="img-fluid" alt="Image goes here">
+        </div>
+        <div class="col-md bg-secondary">Image meta data
+        </div>
+      </div>
+
+      <div class="row">Please label the image according to the weapon in use
+      </div>
+
+      <div class="row">
+        <div class="col-md" align="center">
+          <form class="justify-content-around" action="/imagesHelp" method="post">
+            <button class="btn btn-primary" type="submit" value="epee">Epee</button>
+            <button class="btn btn-primary" type="submit" value="foil">Foil</button>
+            <button class="btn btn-primary" type="submit" value="sabre">Sabre</button>
+            <button class="btn btn-primary" type="submit" value="none">None</button>
+          </form>
+        </div>
+        <div class="col- bg-success">
+          <form action="/imagesHelp" method="get">
+            <button class="btn btn-primary" type="submit">Skip</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
