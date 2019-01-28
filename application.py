@@ -1,7 +1,7 @@
 from flask import Flask, redirect, render_template, request
 import sqlite3
 import numpy
-from helpers_web import list_to_inverse_prob, query_db
+from helpers_web import list_to_inverse_prob, query_db, get_image_path
 
 # Configure application
 app = Flask(__name__)
@@ -36,10 +36,11 @@ def imagesHelp():
         probs = list_to_inverse_prob(counts)
         # Selects one image from list respecting probabilities in probs
         selected_image = numpy.random.choice(images,1,p=probs)[0]
+        image_path = get_image_path(selected_image)
 
         #Present image and wait for label
         """TODO: make new template and call it passing file name"""
-        return render_template('imageHelp.html',image_name=(str(selected_image).zfill(12)+'.jpg'))
+        return render_template('imageHelp.html',image_path=image_path)
     else:
         """Receive label from user and enter it into image_labels table"""
         """TODO:"""

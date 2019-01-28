@@ -1,5 +1,6 @@
 import numpy
 import sqlite3
+import os
 
 def query_db(db_name, command_string):
     """Receives a sqlite db object, executes a query on it as per command_string and returns results in format of lists - caller must know how many lists will be returned"""
@@ -18,3 +19,9 @@ def list_to_inverse_prob(l):
     total = a.sum()
     a = a / total
     return a
+
+def get_image_path(index):
+    """Receives a file number without extension and returns the full path to it"""
+    file_list = os.listdir('./data/images')
+    path = './data/images/' + file_list[index]
+    return path
