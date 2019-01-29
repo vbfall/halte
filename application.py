@@ -1,8 +1,7 @@
 from flask import Flask, redirect, render_template, request
 import sqlite3
 import numpy
-from helpers_web import list_to_inverse_prob, query_db, get_image_path, get_form_optional_value
-import csv
+from helpers_web import list_to_inverse_prob, query_db, get_image_path, get_user_info
 
 # Configure application
 app = Flask(__name__)
@@ -41,25 +40,21 @@ def imagesHelp():
 
         #Present image and wait for label
         """TODO: make new template and call it passing file name"""
-        return render_template('imageHelp.html',image_path=image_path)
+        return render_template('imageHelp.html',image_path=image_path,image_id=selected_image)
     else:
         # If route called from 'skip' button redirect to GET method
         if request.form['label']=='skip':
             return redirect('/imagesHelp')
 
         # Get user info
-        user_name = get_form_optional_value(request, 'user_name')
-        nationality = get_form_optional_value(request,'nationality')
-        favored_weapon = get_form_optional_value(request,'favored_weapon')
-        fencing_since = get_form_optional_value(request,'fencing_since')
-        yob = get_form_optional_value(request,'yob')
+        user_info = get_user_info(request)
+
+        # Save user to db
+        # Fetch user_id
 
         # Get label and image id
         label = request.form['label']
-
-        with open('test_file.csv', mode='w') as test_file:
-            test_writer = csv.writer(test_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            test_writer.writerow([user_name, nationality, favored_weapon, fencing_since, yob, label])
+        image_id = request.form['image_id']
 
         # Save label to db
         """TODO:"""

@@ -33,3 +33,12 @@ def get_form_optional_value(request, field_name):
     try: result = request.form[field_name]
     except: result = ''
     return result
+
+def get_user_info(request):
+    user_info = dict()
+    user_info['user_name'] = get_form_optional_value(request, 'user_name')
+    user_info['nationality'] = get_form_optional_value(request,'nationality')
+    user_info['favored_weapon'] = get_form_optional_value(request,'favored_weapon')
+    user_info['fencing_since'] = get_form_optional_value(request,'fencing_since')
+    user_info['yob'] = get_form_optional_value(request,'yob')
+    return user_info
