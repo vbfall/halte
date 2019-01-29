@@ -61,7 +61,7 @@ def clipsApply():
 
 @app.route('/thanks')
 def thanks():
-    return render_template('pasdetouche.html')
+    return render_template('thanks.html')
 
 
 
