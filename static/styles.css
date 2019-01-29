@@ -16,7 +16,7 @@ body {height: 93%;}
     height: 100%;
     background-repeat: no-repeat;
     background-size: cover;
-    color: #850000;
+    color: #500000;
 }
 
 a:link {
@@ -26,7 +26,7 @@ a:link {
 
 img.img-fluid {
   max-width: 90vw;
-  max-height: 80vh;
+  max-height: 75vh;
 }
 
 col-sm {
