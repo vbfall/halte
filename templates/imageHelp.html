@@ -11,13 +11,19 @@
     <!-- this perhaps should be a sidebar? -->
     <div class="col-fluid shrink m-2">
       Please identify yourself:
-      <form class="justify-content-around" action="/imagesHelp">
-        <input name="user_name" autofocus type="text" size="12" placeholder="NAME, Initial" /><br>
-        <input name="nationality" type="text" size="4" placeholder="Nationality" /><br>
-        <input name="favored_weapon" type="text" size="12" placeholder="Weapon" /><br>
-        <input name="fencing_since" type="text" size="6" placeholder="fenc. since" /><br>
-        <input name="yob" type="text" size="6" placeholder="born year" />
-      </form>
+      <div class="form-group justify-content-around">
+        <input id="user_name" type="username" autofocus class="form-control" size="12" placeholder="NAME, Initial" /><br>
+        <input type="text" class="form-control" size="12" placeholder="Nationality" /><br>
+        <select id="favored_weapon" class="form-control" type="text" placeholder="Weapon">
+          <option disabled selected value>Weapon</option>
+          <option value="epee">Epee</option>
+          <option value="foil">Foil</option>
+          <option value="sabre">Sabre</option>
+        </select>
+        <br>
+        <input id="fencing_since" class="form-control" type="year" size="12" placeholder="fenc. since" /><br>
+        <input id="yob" type="year" class="form-control" size="12" placeholder="born year" />
+      </div>
     </div>
 
     <div class="col-xl-auto m-2">
