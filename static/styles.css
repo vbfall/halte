@@ -23,3 +23,12 @@ a:link {
    color:inherit;
    font-weight: bold;
 }
+
+img.img-fluid {
+  max-width: 90vw;
+  max-height: 80vh;
+}
+
+col-sm {
+  max-width: 50px;
+}
