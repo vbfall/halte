@@ -2,14 +2,24 @@ import numpy
 import sqlite3
 import os
 
+
 def query_db(db_name, command_string):
-    """Receives a sqlite db object, executes a query on it as per command_string and returns results in format of lists - caller must know how many lists will be returned"""
+    """Receives a db name, opens it with sqlite, executes a query on it as per command_string and returns results in format of lists - caller must know how many lists will be returned"""
     db = sqlite3.connect(db_name)
     cur = db.cursor()
     cur.execute(command_string)
     results = cur.fetchall()
-    db.close()
     return zip(*results)
+
+
+def insert_into_db(db_name, table_name, values):
+    """Receives a db and table name, and inserts a dict of values into it"""
+    db = sqlite3.connect(db_name)
+    cur = db.cursor()
+    """TODO"""
+    # cur.execute('INSERT INTO ? ()',table_name)
+    db.close()
+    return 0
 
 
 def list_to_inverse_prob(l):
@@ -33,6 +43,7 @@ def get_form_optional_value(request, field_name):
     try: result = request.form[field_name]
     except: result = ''
     return result
+
 
 def get_user_info(request):
     user_info = dict()
