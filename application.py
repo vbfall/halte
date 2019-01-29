@@ -1,7 +1,7 @@
 from flask import Flask, redirect, render_template, request
 import sqlite3
 import numpy
-from helpers_web import list_to_inverse_prob, query_db, get_image_path
+from helpers_web import list_to_inverse_prob, query_db, get_image_path, get_form_optional_value
 import csv
 
 # Configure application
@@ -47,14 +47,12 @@ def imagesHelp():
         if request.form['label']=='skip':
             return redirect('/imagesHelp')
 
-        favored_weapon = 'placeholder'
-
         # Get user info
-        user_name = request.form['user_name']
-        nationality = request.form['nationality']
-        favored_weapon = request.form['favored_weapon']
-        fencing_since = request.form['fencing_since']
-        yob = request.form['yob']
+        user_name = get_form_optional_value(request, 'user_name')
+        nationality = get_form_optional_value(request,'nationality')
+        favored_weapon = get_form_optional_value(request,'favored_weapon')
+        fencing_since = get_form_optional_value(request,'fencing_since')
+        yob = get_form_optional_value(request,'yob')
 
         # Get label and image id
         label = request.form['label']

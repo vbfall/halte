@@ -27,3 +27,9 @@ def get_image_path(index):
     file_list = os.listdir('.'+path_to_images)
     path = path_to_images + file_list[index]
     return path
+
+
+def get_form_optional_value(request, field_name):
+    try: result = request.form[field_name]
+    except: result = ''
+    return result
