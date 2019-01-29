@@ -5,6 +5,14 @@
 {% endblock %}
 
 {% block main %}
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    jQuery('input,select,textarea').persist({
+      session :false
+    });
+  });
+</script>
+
 <!-- can there be a layout within a layout? -->
 <div class="container-fluid">
   <div class="row">
@@ -12,17 +20,17 @@
     <div class="col-fluid shrink m-2">
       Please identify yourself:
       <div class="form-group justify-content-around">
-        <input id="user_name" type="username" autofocus class="form-control" size="12" placeholder="NAME, Initial" /><br>
-        <input type="text" class="form-control" size="12" placeholder="Nationality" /><br>
-        <select id="favored_weapon" class="form-control" type="text" placeholder="Weapon">
+        <input id="user_name" name="user_name" type="username" autofocus class="form-control" size="12" placeholder="NAME, Initial" /><br>
+        <input id="nationality" name="nationality" type="text" class="form-control" size="12" placeholder="Nationality" /><br>
+        <select id="favored_weapon" name="weapon" class="form-control" type="text" placeholder="Weapon">
           <option disabled selected value>Weapon</option>
           <option value="epee">Epee</option>
           <option value="foil">Foil</option>
           <option value="sabre">Sabre</option>
         </select>
         <br>
-        <input id="fencing_since" class="form-control" type="year" size="12" placeholder="fenc. since" /><br>
-        <input id="yob" type="year" class="form-control" size="12" placeholder="born year" />
+        <input id="fencing_since" name="fencing_since" class="form-control" type="year" size="12" placeholder="fenc. since" /><br>
+        <input id="yob" name="yob" type="year" class="form-control" size="12" placeholder="born year" />
       </div>
     </div>
 
