@@ -9,14 +9,22 @@
 <div class="container-fluid">
   <div class="row">
     <!-- this perhaps should be a sidebar? -->
-    <div class="col-sm shrink bg-secondary">user info
+    <div class="col-fluid shrink p-1">
+      Please identify yourself:
+      <form class="justify-content-around" action="/imagesHelp">
+        <input name="user_name" autofocus type="text" size="12" placeholder="NAME, Initial" />
+        <input name="nationality" type="text" size="4" placeholder="Nationality" />
+        <input name="favored_weapon" type="text" size="12" placeholder="Weapon" />
+        <input name="fencing_since" type="text" size="6" placeholder="fenc. since" />
+        <input name="yob" type="text" size="6" placeholder="born year" />
+      </form>
     </div>
 
-    <div class="col-md-auto">
+    <div class="col-xl-auto p-1">
       <div class="row">
-        <div class="col-md-auto"><img src={{image_path}} class="img-fluid" alt="Image goes here">
+        <div class="col-md-auto p-1"><img src={{image_path}} class="img-fluid" alt="Image goes here">
         </div>
-        <div class="col-md bg-secondary">Image meta data
+        <div class="col-fluid p-1 bg-secondary">Source:
         </div>
       </div>
 
@@ -24,7 +32,7 @@
       </div>
 
       <div class="row">
-        <div class="col-md" align="center">
+        <div class="col-md p-1" align="center">
           <form class="justify-content-around" action="/imagesHelp" method="post">
             <button class="btn btn-primary" type="submit" value="epee">Epee</button>
             <button class="btn btn-primary" type="submit" value="foil">Foil</button>
@@ -32,9 +40,9 @@
             <button class="btn btn-primary" type="submit" value="none">None</button>
           </form>
         </div>
-        <div class="col- bg-success">
+        <div class="col- p-1">
           <form action="/imagesHelp" method="get">
-            <button class="btn btn-primary" type="submit">Skip</button>
+            <button class="btn btn-primary" type="submit" value="skip">Skip</button>
           </form>
         </div>
       </div>
