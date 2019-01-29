@@ -2,6 +2,7 @@ from flask import Flask, redirect, render_template, request
 import sqlite3
 import numpy
 from helpers_web import list_to_inverse_prob, query_db, get_image_path
+import csv
 
 # Configure application
 app = Flask(__name__)
@@ -42,8 +43,29 @@ def imagesHelp():
         """TODO: make new template and call it passing file name"""
         return render_template('imageHelp.html',image_path=image_path)
     else:
-        """Receive label from user and enter it into image_labels table"""
+        # If route called from 'skip' button redirect to GET method
+        if request.form['label']=='skip':
+            return redirect('/imagesHelp')
+
+        favored_weapon = 'placeholder'
+
+        # Get user info
+        user_name = request.form['user_name']
+        nationality = request.form['nationality']
+        favored_weapon = request.form['favored_weapon']
+        fencing_since = request.form['fencing_since']
+        yob = request.form['yob']
+
+        # Get label and image id
+        label = request.form['label']
+
+        with open('test_file.csv', mode='w') as test_file:
+            test_writer = csv.writer(test_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            test_writer.writerow([user_name, nationality, favored_weapon, fencing_since, yob, label])
+
+        # Save label to db
         """TODO:"""
+
         # At the end, select new random image
         return redirect('/imagesHelp')
 

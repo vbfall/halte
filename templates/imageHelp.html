@@ -13,17 +13,20 @@
   });
 </script>
 
+
+
 <!-- can there be a layout within a layout? -->
-<div class="container-fluid">
+<form class="container-fluid" action="/imagesHelp" method="post">
   <div class="row">
     <!-- this perhaps should be a sidebar? -->
     <div class="col-fluid shrink m-2">
-      Please identify yourself:
-      <div class="form-group justify-content-around">
+      Please identify yourself:<br>
+      <small>(for statistical purposes and thanks)</small>
+      <div class="justify-content-around">
         <input id="user_name" name="user_name" type="username" autofocus class="form-control" size="12" placeholder="NAME, Initial" /><br>
         <input id="nationality" name="nationality" type="text" class="form-control" size="12" placeholder="Nationality" /><br>
-        <select id="favored_weapon" name="weapon" class="form-control" type="text" placeholder="Weapon">
-          <option disabled selected value>Weapon</option>
+        <select id="favored_weapon" name="favored_weapon" class="form-control" type="text" placeholder="Weapon">
+          <option disabled selected value>Fav. weapon</option>
           <option value="epee">Epee</option>
           <option value="foil">Foil</option>
           <option value="sabre">Sabre</option>
@@ -50,20 +53,20 @@
 
       <div class="row">
         <div class="col-md m-2" align="center">
-          <form class="justify-content-around" action="/imagesHelp" method="post">
-            <button class="btn btn-primary" type="submit" value="epee">Epee</button>
-            <button class="btn btn-primary" type="submit" value="foil">Foil</button>
-            <button class="btn btn-primary" type="submit" value="sabre">Sabre</button>
-            <button class="btn btn-primary" type="submit" value="none">None</button>
-          </form>
+          <div class="justify-content-around" >
+            <button class="btn btn-primary" type="submit" value="epee" name="label">Epee</button>
+            <button class="btn btn-primary" type="submit" value="foil" name="label">Foil</button>
+            <button class="btn btn-primary" type="submit" value="sabre" name="label">Sabre</button>
+            <button class="btn btn-primary" type="submit" value="none" name="label">None</button>
+          </div>
         </div>
         <div class="col- m-2">
-          <form class="justify-content-center" action="/imagesHelp" method="get">
-            <button class="btn btn-primary" type="submit" value="skip">Skip</button>
-          </form>
+          <div class="justify-content-center">
+            <button class="btn btn-primary" type="submit" value="skip" name="label">Skip</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</form>
 {% endblock %}
