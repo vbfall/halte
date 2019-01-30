@@ -6,6 +6,7 @@ from datetime import date
 
 def query_db(db_name, command_string):
     """Receives a db name, opens it with sqlite, executes a query on it as per command_string and returns results in format of lists - caller must know how many lists will be returned"""
+    #Actually just found out it only works with two lists - look at it later
     db = sqlite3.connect(db_name)
     cur = db.cursor()
     cur.execute(command_string)
@@ -99,24 +100,28 @@ def insert_user(request):
     ids = []
     # assign anonymous user name if user name not provided
     if len(user_info['name']) == 0:
-        user_count = query_db('halte.db','SELECT COUNT(*) FROM users')[0]
-        user_info['name'] = 'anonymous_'+str(user_count+1).zfill(6)
+        user_count, name_count = query_db('halte.db','SELECT COUNT(*), COUNT(DISTINCT name) FROM users')
+        user_info['name'] = 'anonymous_'+str(user_count[0]+1).zfill(6)
 
     user_id = 0
-    while !user_id:
-        ids, names = query_db('halte.db','SELECT user_id, name FROM users WHERE name = \"' + user_info['name'] + '\"')
+    while user_id==0:
+        try: ids, names = query_db('halte.db','SELECT user_id, name FROM users WHERE name = \"' + user_info['name'] + '\" ORDER BY user_id')
+        except: pass
+
         if len(ids) > 0:
             # Fetch user_id (gets latest user in list)
             user_id = ids[-1]
         else:
+            # prepare row to save user into db
+            row = dict()
+            for key, value in user_info.items():
+                if type(value) == int:
+                    row[key] = str(value)
+                else:
+                    row[key] = '\"'+value+'\"'
+
             # Save user to db
-            row = {'fencing_since':str(user_info['fencing_since']),'name':'\"'+user_info['name']+'\"'}
-            if user_info['birth_year']:
-                row['birth_year'] = str(user_info['birth_year'])
-            if user_info['favored_weapon']:
-                row['favored_weapon'] = '\"'+user_info['favored_weapon']+'\"'
-            if user_info['nationality']:
-                row['nationality'] = '\"'+user_info['nationality']+'\"'
             _ = insert_into_db('halte.db','users',row)
+
     return user_id
 # end of insert_user
