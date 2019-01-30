@@ -50,7 +50,8 @@ def imagesHelp():
         # Get user info
         user_info = get_user_info(request)
 
-        existing_user = query_db('halte.db')
+        #
+        ids, names = query_db('halte.db','SELECT user_id, name FROM users WHERE name = ')
         # Save user to db
         """TODO"""
         # Fetch user_id

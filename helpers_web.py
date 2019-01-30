@@ -1,6 +1,7 @@
 import numpy
 import sqlite3
 import os
+import datetime
 
 
 def query_db(db_name, command_string):
@@ -58,9 +59,17 @@ def get_form_optional_value(request, field_name):
 
 def get_user_info(request):
     user_info = dict()
-    user_info['user_name'] = get_form_optional_value(request, 'user_name')
+    user_info['name'] = get_form_optional_value(request, 'user_name')
+    user_info['name'] = user_info['name'].replace('.','').replace(',','')\
+                        .replace('SELECT ','').replace('TABLE ','').replace('INTO ','')\
+                        .replace('\"','').strip()
     user_info['nationality'] = get_form_optional_value(request,'nationality')
+    user_info['nationality'] = user_info['nationality'].replace('.','').replace(',','')\
+                                .replace('SELECT ','').replace('TABLE ','').replace('INTO ','')\
+                                .replace('\"','').strip()
     user_info['favored_weapon'] = get_form_optional_value(request,'favored_weapon')
-    user_info['fencing_since'] = get_form_optional_value(request,'fencing_since')
-    user_info['yob'] = get_form_optional_value(request,'yob')
+    try: user_info['fencing_since'] = int(get_form_optional_value(request,'fencing_since'))
+    except: user_info['fencing_since'] = int(datetime.datetime.now().year) - 2 # if no year given, assumes user has at least 2 years experience
+    try: user_info['yob'] = int(get_form_optional_value(request,'yob'))
+    except: user_info['yob'] = ''
     return user_info
