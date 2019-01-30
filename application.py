@@ -2,7 +2,7 @@ from flask import Flask, redirect, render_template, request
 import sqlite3
 import numpy
 from helpers_web import query_db, insert_into_db
-from helpers_web import list_to_inverse_prob, get_image_path, get_user_info,
+from helpers_web import list_to_inverse_prob, get_image_path, get_user_info
 
 # Configure application
 app = Flask(__name__)
@@ -54,15 +54,15 @@ def imagesHelp():
         """TODO"""
         # Fetch user_id
         """TODO"""
-        user_id = 2
+        user_id = 42
 
         # Get label and image id
         label = request.form['label']
         image_id = request.form['image_id']
 
         # Insert label into db
-        """TODO: assemble row dictionary to pass to function"""
-        _ = insert_into_db('halte.db','image_labels',{image_id=image_id, label=label, label_category='weapon', user_id=user_id})
+        row = {'image_id':str(image_id), 'label':'\"'+label+'\"', 'label_category':'\"weapon\"', 'user_id':str(user_id)}
+        _ = insert_into_db('halte.db','image_labels',row)
 
         # At the end, select new random image
         return redirect('/imagesHelp')

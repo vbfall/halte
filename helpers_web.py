@@ -16,15 +16,15 @@ def query_db(db_name, command_string):
 
 def insert_into_db(db_name, table_name, row):
     """Receives a db and table name and a row dict, and inserts row into table"""
-    db = sqlite3.connect(db_name)
-    cur = db.cursor()
-    # construct query
     # Sample row:
     # row = {'name':'\"THREEPWOOD, G\"', 'nationality':'\"LUC\"', 'fencing_since':'1992', 'fav_weapon':'\"rapier\"', 'birth_year':'1972'}
     # note escaped quotes for string fields and integer fields as simple strings
+    db = sqlite3.connect(db_name)
+    cur = db.cursor()
+    # construct query
     fields = ','.join(list(row.keys()))
     values = ','.join(list(row.values()))
-    query = 'INSERT INTO ' + table + ' (' + fields + ') VALUES (' + values + ')'
+    query = 'INSERT INTO ' + table_name + ' (' + fields + ') VALUES (' + values + ')'
     # Send query to db
     cur.execute(query)
     db.commit()
