@@ -82,7 +82,7 @@ def get_user_info(request):
                                     .replace('\"','').strip()
     except: pass
 
-    try: user_info['favored_weapon'] = request.form['favored_weapon']
+    try: user_info['fav_weapon'] = request.form['favored_weapon']
     except: pass
 
     try: user_info['birth_year'] = int(request.form['yob'])
