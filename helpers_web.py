@@ -1,7 +1,7 @@
 import numpy
 import sqlite3
 import os
-import datetime
+from datetime import date
 
 
 def query_db(db_name, command_string):
@@ -52,24 +52,71 @@ def get_image_path(index):
 
 
 def get_form_optional_value(request, field_name):
+    """Returns value of a form field from html, or '' if field empty"""
     try: result = request.form[field_name]
     except: result = ''
     return result
 
 
 def get_user_info(request):
+    """Retrieves user information from html form fields"""
     user_info = dict()
-    user_info['name'] = get_form_optional_value(request, 'user_name')
-    user_info['name'] = user_info['name'].replace('.','').replace(',','')\
-                        .replace('SELECT ','').replace('TABLE ','').replace('INTO ','')\
-                        .replace('\"','').strip()
-    user_info['nationality'] = get_form_optional_value(request,'nationality')
-    user_info['nationality'] = user_info['nationality'].replace('.','').replace(',','')\
-                                .replace('SELECT ','').replace('TABLE ','').replace('INTO ','')\
-                                .replace('\"','').strip()
-    user_info['favored_weapon'] = get_form_optional_value(request,'favored_weapon')
-    try: user_info['fencing_since'] = int(get_form_optional_value(request,'fencing_since'))
-    except: user_info['fencing_since'] = int(datetime.datetime.now().year) - 2 # if no year given, assumes user has at least 2 years experience
-    try: user_info['yob'] = int(get_form_optional_value(request,'yob'))
-    except: user_info['yob'] = ''
+
+    # this one is necessary
+    try: user_info['fencing_since'] = int(request.form['fencing_since'])
+    except: user_info['fencing_since'] = int(date.today().year) - 2 # if no year given, assumes user has at least 2 years experience
+
+    # all others are optional
+    try:
+        user_info['name'] = request.form['user_name'].upper()
+        user_info['name'] = user_info['name'].replace('.','').replace(',','')\
+                            .replace('SELECT ','').replace('TABLE ','').replace('INTO ','')\
+                            .replace('\"','').strip()
+    except: pass
+
+    try:
+        user_info['nationality'] = request.form['nationality'].upper()
+        user_info['nationality'] = user_info['nationality'].replace('.','').replace(',','')\
+                                    .replace('SELECT ','').replace('TABLE ','').replace('INTO ','')\
+                                    .replace('\"','').strip()
+    except: pass
+
+    try: user_info['favored_weapon'] = request.form['favored_weapon']
+    except: pass
+
+    try: user_info['birth_year'] = int(request.form['yob'])
+    except: pass
+
     return user_info
+# end of get_user_info
+
+
+def insert_user(request):
+    """Inserts user into db if not there yet and returns user_id"""
+    # (Save user to db if necessary and) retrieve user_id
+    user_info = get_user_info(request)
+
+    ids = []
+    # assign anonymous user name if user name not provided
+    if len(user_info['name']) == 0:
+        user_count = query_db('halte.db','SELECT COUNT(*) FROM users')[0]
+        user_info['name'] = 'anonymous_'+str(user_count+1).zfill(6)
+
+    user_id = 0
+    while !user_id:
+        ids, names = query_db('halte.db','SELECT user_id, name FROM users WHERE name = \"' + user_info['name'] + '\"')
+        if len(ids) > 0:
+            # Fetch user_id (gets latest user in list)
+            user_id = ids[-1]
+        else:
+            # Save user to db
+            row = {'fencing_since':str(user_info['fencing_since']),'name':'\"'+user_info['name']+'\"'}
+            if user_info['birth_year']:
+                row['birth_year'] = str(user_info['birth_year'])
+            if user_info['favored_weapon']:
+                row['favored_weapon'] = '\"'+user_info['favored_weapon']+'\"'
+            if user_info['nationality']:
+                row['nationality'] = '\"'+user_info['nationality']+'\"'
+            _ = insert_into_db('halte.db','users',row)
+    return user_id
+# end of insert_user

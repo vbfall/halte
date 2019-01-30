@@ -1,8 +1,8 @@
 from flask import Flask, redirect, render_template, request
 import sqlite3
 import numpy
-from helpers_web import query_db, insert_into_db
-from helpers_web import list_to_inverse_prob, get_image_path, get_user_info
+from helpers_web import query_db, insert_into_db, insert_user
+from helpers_web import list_to_inverse_prob, get_image_path
 
 # Configure application
 app = Flask(__name__)
@@ -47,16 +47,8 @@ def imagesHelp():
         if request.form['label']=='skip':
             return redirect('/imagesHelp')
 
-        # Get user info
-        user_info = get_user_info(request)
-
-        #
-        ids, names = query_db('halte.db','SELECT user_id, name FROM users WHERE name = ')
-        # Save user to db
-        """TODO"""
-        # Fetch user_id
-        """TODO"""
-        user_id = 42
+        # Get user id and insert into database if needed
+        user_id = insert_user(request)
 
         # Get label and image id
         label = request.form['label']
