@@ -1,7 +1,8 @@
 from flask import Flask, redirect, render_template, request
 import sqlite3
 import numpy
-from helpers_web import list_to_inverse_prob, query_db, get_image_path, get_user_info
+from helpers_web import query_db, insert_into_db, insert_user
+from helpers_web import list_to_inverse_prob, get_image_path
 
 # Configure application
 app = Flask(__name__)
@@ -46,18 +47,16 @@ def imagesHelp():
         if request.form['label']=='skip':
             return redirect('/imagesHelp')
 
-        # Get user info
-        user_info = get_user_info(request)
-
-        # Save user to db
-        # Fetch user_id
+        # Get user id and insert into database if needed
+        user_id = insert_user(request)
 
         # Get label and image id
         label = request.form['label']
         image_id = request.form['image_id']
 
-        # Save label to db
-        """TODO:"""
+        # Insert label into db
+        row = {'image_id':str(image_id), 'label':'\"'+label+'\"', 'label_category':'\"weapon\"', 'user_id':str(user_id)}
+        _ = insert_into_db('halte.db','image_labels',row)
 
         # At the end, select new random image
         return redirect('/imagesHelp')
