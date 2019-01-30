@@ -78,7 +78,8 @@ def thanks():
     names, nats = query_db('halte.db','SELECT name, nationality FROM users ORDER BY name')
     thanks_list = []
     for a,b in zip(names, nats):
-        thanks_list.append(a+' - '+b)
+        if 'anonymous_' not in a:
+            thanks_list.append(a+' - '+b) 
 
     return render_template('thanks.html',thanks_list=thanks_list)
 
