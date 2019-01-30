@@ -9,7 +9,8 @@ def query_db(db_name, command_string):
     cur = db.cursor()
     cur.execute(command_string)
     results = cur.fetchall()
-    results = zip(*results)
+    if len(results) > 0:
+        results = zip(*results)
     db.close()
     return results
 
