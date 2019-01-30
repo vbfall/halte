@@ -61,6 +61,7 @@ def imagesHelp():
         image_id = request.form['image_id']
 
         # Insert label into db
+        """TODO: assemble row dictionary to pass to function"""
         _ = insert_into_db('halte.db','image_labels',{image_id=image_id, label=label, label_category='weapon', user_id=user_id})
 
         # At the end, select new random image
