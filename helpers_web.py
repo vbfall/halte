@@ -9,15 +9,25 @@ def query_db(db_name, command_string):
     cur = db.cursor()
     cur.execute(command_string)
     results = cur.fetchall()
-    return zip(*results)
+    results = zip(*results)
+    db.close()
+    return results
 
 
-def insert_into_db(db_name, table_name, values):
-    """Receives a db and table name, and inserts a dict of values into it"""
+def insert_into_db(db_name, table_name, row):
+    """Receives a db and table name and a row dict, and inserts row into table"""
     db = sqlite3.connect(db_name)
     cur = db.cursor()
-    """TODO"""
-    # cur.execute('INSERT INTO ? ()',table_name)
+    # construct query
+    # Sample row:
+    # row = {'name':'\"THREEPWOOD, G\"', 'nationality':'\"LUC\"', 'fencing_since':'1992', 'fav_weapon':'\"rapier\"', 'birth_year':'1972'}
+    # note escaped quotes for string fields and integer fields as simple strings
+    fields = ','.join(list(row.keys()))
+    values = ','.join(list(row.values()))
+    query = 'INSERT INTO ' + table + ' (' + fields + ') VALUES (' + values + ')'
+    # Send query to db
+    cur.execute(query)
+    db.commit()
     db.close()
     return 0
 
