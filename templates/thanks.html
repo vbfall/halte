@@ -14,8 +14,9 @@
     </div>
     <div class="col-fluid m-3">
       <h3>Thanks to all fencers who helped label the data!</h3>
-      FALLEIROS, V - BRA<br>
-      THREEPWOOD, G - LUC<br>
+      {% for row in thanks_list %}
+      {{ row }}<br>
+      {% endfor %}
     </div>
   </div>
 </div>
