@@ -1,5 +1,6 @@
 # Directory containing training & test data
 data/clips/**
+models/data/clips/**
 
 
 # Support data
