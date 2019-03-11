@@ -1,6 +1,6 @@
 # Directory containing training & test data
-data/clips/**
-models/data/clips/**
+data/**
+notebooks/**
 
 
 # Support data
