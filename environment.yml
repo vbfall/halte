@@ -1,0 +1,8 @@
+name: halte
+dependencies:
+  - python=3.7.*
+  - numpy=1.16.4
+  - pandas=0.24.2
+  - opencv
+  - pillow=6.1.0
+  - tqdm=4.32.1
