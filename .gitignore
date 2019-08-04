@@ -2,16 +2,12 @@
 data/**
 notebooks/**
 
+# Confidential references
+references/confidential
+
 
 # Support data
 credentials.log
-
-# Support data
-credentials.log
-
-# Foundations (at least while using an open git repo)
-docker/foundations
-docker/foundations/**
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
