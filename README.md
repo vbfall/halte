@@ -22,6 +22,7 @@ This project is intended as a learning tool for the fencing community (and also 
 ## Many thanks to...
 
 For providing huge amounts of data (images and videos):
-- Fernando Scavasin
+- Carla Scalabrin (BRA)
+- Fernando Scavasin (BRA)
 
 _more to come..._
