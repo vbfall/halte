@@ -33,25 +33,30 @@ class DataPipeline(object):
             class_list = list(self.data_dir.glob(c+'/*'))
             class_nested_list.append(class_list)
 
-        # split each class list
-        train_list = []
-        test_list = []
-        for class_list in class_nested_list:
-            class_train, class_test = train_test_split(class_list, train_size=train_split, random_state=SEED)
-            train_list = train_list + class_train
-            test_list = test_list + class_test
-
-        # extract strings from paths (TF requires strings)
-        train_list = [str(file_path) for file_path in train_list]
-        test_list = [str(file_path) for file_path in test_list]
+        train_list, test_list = self._split_nested_lists(class_nested_list, train_split)
         print('Split dataset of {} samples into {} train samples and {} test samples'.format(self.image_count, len(train_list), len(test_list)))
 
         if (self.image_count == len(train_list) + len(test_list)):
+            # extract strings from paths (TF requires strings)
+            train_list = [str(file_path) for file_path in train_list]
+            test_list = [str(file_path) for file_path in test_list]
+
             self.train_list = train_list
             self.test_list = test_list
             print('Train and test lists set')
         else:
             print('Data count mismatch; train and test lists not set')
+
+
+    def _split_nested_lists(self, nested_list, train_split):
+        # split each class list
+        train_list = []
+        test_list = []
+        for sub_list in nested_list:
+            sub_train, sub_test = train_test_split(sub_list, train_size=train_split, random_state=SEED)
+            train_list = train_list + sub_train
+            test_list = test_list + sub_test
+        return train_list, test_list
 
 
     def load_dataset(self, train=True, IMG_WIDTH=256, IMG_HEIGHT=None):
