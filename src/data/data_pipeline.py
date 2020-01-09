@@ -72,7 +72,7 @@ class DataPipeline(object):
                 dataset_paths = self.train_list
             else:
                 print('Loading test dataset.')
-                dataset_paths = self.train_list
+                dataset_paths = self.test_list
             file_list_ds = tf.data.Dataset.from_tensor_slices(dataset_paths)
 
             print('Mapping preprocessing.')
