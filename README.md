@@ -18,4 +18,10 @@ That said, this project is *not an attempt at replacing human referees* in any s
 
 This project is intended as a learning tool for the fencing community (and also as a Machine Learning exercise initiated by a passionate fencer). There can be no guarantee at this point as to how accurate or how fast the refereeing system will be. As any human referee, Machine Learning algorithms are rarely 100% perfect (though other use cases have proved that they can frequently be more accurate than humans).
 
+
+## Many thanks to...
+
+For providing huge amounts of data (images and videos):
+- Fernando Scavasin
+
 _more to come..._
