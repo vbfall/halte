@@ -54,7 +54,7 @@ class DataPipeline(object):
             print('Data count mismatch; train and test lists not set')
 
 
-    def load_dataset(self, dataset_paths=None, BATCH_SIZE=32, IMG_WIDTH=256, IMG_HEIGHT=None):
+    def load_dataset(self, dataset_paths=None, IMG_WIDTH=256, IMG_HEIGHT=None):
         print('Loading dataset...')
         self.IMG_WIDTH = IMG_WIDTH
         if IMG_HEIGHT:
@@ -78,7 +78,7 @@ class DataPipeline(object):
             return None
 
 
-    def prepare_for_training(self, ds, cache=True, shuffle_buffer_size=1000, b_size=32):
+    def prepare_for_training(self, ds, cache=True, shuffle_buffer_size=1000, batch_size=32):
       # If this is a small dataset, only load it once, and keep it in memory.
       # use `.cache(filename)` to cache preprocessing work for datasets that don't
       # fit in memory.
@@ -91,7 +91,7 @@ class DataPipeline(object):
         ds = ds.shuffle(buffer_size=shuffle_buffer_size)
         # Repeat forever
         ds = ds.repeat()
-        ds = ds.batch(b_size)
+        ds = ds.batch(batch_size)
         # `prefetch` lets the dataset fetch batches in the background while the model
         # is training.
         ds = ds.prefetch(buffer_size=AUTOTUNE)
