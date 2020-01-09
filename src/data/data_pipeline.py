@@ -54,7 +54,7 @@ class DataPipeline(object):
             print('Data count mismatch; train and test lists not set')
 
 
-    def load_dataset(self, dataset_paths=None, IMG_WIDTH=256, IMG_HEIGHT=None):
+    def load_dataset(self, train=True, IMG_WIDTH=256, IMG_HEIGHT=None):
         print('Loading dataset...')
         self.IMG_WIDTH = IMG_WIDTH
         if IMG_HEIGHT:
@@ -63,19 +63,21 @@ class DataPipeline(object):
             self.IMG_HEIGHT = IMG_WIDTH
         print('Will resize images to ({}, {})'.format(self.IMG_WIDTH, self.IMG_HEIGHT))
 
-        if not dataset_paths:
-            print('Dataset not specified, will use train list as default.')
-            dataset_paths = self.train_list
-
-        if dataset_paths:
-            print('Loading paths.')
+        if not self.train_list:
+            print('Dataset not split into train / test. Please provide split then retry.')
+            return None
+        else:
+            if train:
+                print('Loading train dataset.')
+                dataset_paths = self.train_list
+            else:
+                print('Loading test dataset.')
+                dataset_paths = self.train_list
             file_list_ds = tf.data.Dataset.from_tensor_slices(dataset_paths)
+
             print('Mapping preprocessing.')
             labeled_ds = file_list_ds.map(self._process_path, num_parallel_calls=AUTOTUNE)
             return labeled_ds
-        else:
-            print('Dataset not split into train / test. Please specify dataset to load or provide split.')
-            return None
 
 
     def prepare_for_training(self, ds, cache=True, shuffle_buffer_size=1000, batch_size=32):
