@@ -2,10 +2,6 @@ import cv2
 import os
 import pathlib
 
-# from PIL import Image
-#
-
-
 IMAGES_PATH = pathlib.Path('../../data/raw/images')
 CLIPS_PATH = pathlib.Path('../../data/raw/clips')
 NUM_FRAMES = 20
