@@ -11,11 +11,20 @@ class WeaponClassifierModel(object):
         print('Registering hyperparameters')
         self.hyper = hyperparameters
         print('Creating keras model...')
-        self.model = keras.Sequential([
-            keras.layers.Flatten(input_shape=input_shape),
-            keras.layers.Dense(96, activation='relu'),
-            keras.layers.Dense(num_classes, activation='softmax')
-            ])
+
+        self.model = keras.Sequential()
+        # Add convs
+
+        # get interface shape
+
+        self.model.add(keras.layers.Flatten(input_shape=input_shape))
+
+        # add dense layers
+        for n in range(0, self.hyper['dense_layers']):
+            layer_size = self.hyper['dense_size'][n]
+            self.model.add(keras.layers.Dense(layer_size, activation=self.hyper['dense_activation']))
+
+        self.model.add(keras.layers.Dense(num_classes, activation='softmax'))
 
 
     def train(self, train_dataset, STEPS_PER_EPOCH=2, epochs=3):
