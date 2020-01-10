@@ -7,8 +7,9 @@ from models.weapon_classifier import WeaponClassifierModel
 data_path = '../data/images'
 
 hyper_dict={'num_epochs': 2,
-    'batch_size': 32,
-    'learning_rate': 0.0001,
+    'batch_size': 64,
+    'learning_rate': 0.001,
+    'decay': 1e-6
     }
 # hyper_dict = foundations.load_parameters()
 
@@ -26,7 +27,7 @@ test_dataset = data_pipeline.prepare_for_training(test_dataset, batch_size=hyper
 STEPS_PER_EPOCH = int(np.ceil(data_pipeline.image_count/hyper_dict['batch_size']))
 
 print('#### INITIALIZE AND TRAIN MODEL ####')
-weapon_classifier = WeaponClassifierModel(input_shape=(data_pipeline.IMG_WIDTH, data_pipeline.IMG_HEIGHT,3), hyperparameters={}, num_classes=len(data_pipeline.class_names))
+weapon_classifier = WeaponClassifierModel(input_shape=(data_pipeline.IMG_WIDTH, data_pipeline.IMG_HEIGHT,3), hyperparameters=hyper_dict, num_classes=len(data_pipeline.class_names))
 weapon_classifier.train(train_dataset, STEPS_PER_EPOCH=STEPS_PER_EPOCH, epochs=hyper_dict['num_epochs'])
 
 print('#### EVALUATE MODEL ####')

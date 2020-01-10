@@ -1,8 +1,4 @@
 
-##########################################
-# Currently exactly copy of the one in Atlas-demo, don't use it
-##########################################
-
 import os
 os.environ['FOUNDATIONS_COMMAND_LINE'] = 'True'
 import foundations
@@ -40,7 +36,8 @@ def sample_hyperparameters(hyperparameter_ranges):
 
 hyperparameter_ranges={'num_epochs': 4,
     'batch_size': SearchSpace(16, 256, int),
-    'learning_rate': SearchSpace(0.00001, 0.01, float),
+    'learning_rate': SearchSpace(1e-5, 1e-2, float),
+    'decay': SearchSpace(1e-7, 1e-5, float),
     }
 
 num_jobs = 5

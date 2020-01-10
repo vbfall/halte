@@ -1,6 +1,8 @@
 
 import tensorflow as tf
 from tensorflow import keras
+from tensorflow.keras.optimizers import RMSprop
+
 # import foundations
 
 class WeaponClassifierModel(object):
@@ -18,10 +20,11 @@ class WeaponClassifierModel(object):
 
     def train(self, train_dataset, STEPS_PER_EPOCH=2, epochs=3):
 
-        # opt = RMSprop(lr=self.hyperparameters['learning_rate'], decay=self.hyperparameters['decay'])
+        opt = RMSprop(lr=self.hyper['learning_rate'], decay=self.hyper['decay'])
 
         print('Compiling model...')
-        self.model.compile(optimizer='adam',
+        # self.model.compile(optimizer='adam',
+        self.model.compile(optimizer=opt,
             loss='sparse_categorical_crossentropy',
             metrics=['accuracy'])
 
