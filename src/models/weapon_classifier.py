@@ -14,10 +14,14 @@ class WeaponClassifierModel(object):
 
         self.model = keras.Sequential()
         # Add convs
+        for n in range(0, self.hyper['conv_layers']):
+            x = 1
 
         # get interface shape
-
-        self.model.add(keras.layers.Flatten(input_shape=input_shape))
+        if self.hyper['conv_layers'] > 0:
+            self.model.add(keras.layers.Flatten())
+        else:
+            self.model.add(keras.layers.Flatten(input_shape=input_shape))
 
         # add dense layers
         for n in range(0, self.hyper['dense_layers']):
