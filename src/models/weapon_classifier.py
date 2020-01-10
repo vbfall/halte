@@ -1,11 +1,13 @@
 
 import tensorflow as tf
 from tensorflow import keras
-
+# import foundations
 
 class WeaponClassifierModel(object):
 
     def __init__(self, input_shape, hyperparameters, num_classes=4):
+        print('Registering hyperparameters')
+        self.hyper = hyperparameters
         print('Creating keras model...')
         self.model = keras.Sequential([
             keras.layers.Flatten(input_shape=input_shape),
@@ -28,5 +30,8 @@ class WeaponClassifierModel(object):
 
 
     def evaluate(self, test_dataset):
+        predictions = self.model.predict(test_dataset)
+        
         test_loss, test_acc = self.model.evaluate(test_dataset, steps=1, verbose=2)
         print('Accuracy on test dataset: {}'.format(test_acc))
+        # foundations.log_metric('Accuracy', float(test_acc))
