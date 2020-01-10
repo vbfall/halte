@@ -5,12 +5,12 @@ from tensorflow import keras
 
 class WeaponClassifierModel(object):
 
-    def __init__(self, input_shape):
+    def __init__(self, input_shape, hyperparameters, num_classes=4):
         print('Creating keras model...')
         self.model = keras.Sequential([
             keras.layers.Flatten(input_shape=input_shape),
             keras.layers.Dense(96, activation='relu'),
-            keras.layers.Dense(4, activation='softmax')
+            keras.layers.Dense(num_classes, activation='softmax')
             ])
 
 
