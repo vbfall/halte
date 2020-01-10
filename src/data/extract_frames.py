@@ -8,8 +8,8 @@ import pathlib
 
 IMAGES_PATH = pathlib.Path('../../data/raw/images')
 CLIPS_PATH = pathlib.Path('../../data/raw/clips')
-NUM_FRAMES = 2
-DEVELOPMENT = True
+NUM_FRAMES = 20
+DEVELOPMENT = True # if TRUE, will use only one clip and extract/save only 2 frames
 
 
 def get_file_number(file_path):
@@ -59,6 +59,7 @@ if __name__ == "__main__":
     # Safety / test
     if DEVELOPMENT:
         clips_list = clips_list[0:1]
+        NUM_FRAMES = 2
 
     for clip_path in clips_list:
         weapon = clip_path.split(os.path.sep)[-2]
