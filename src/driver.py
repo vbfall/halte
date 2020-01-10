@@ -6,7 +6,7 @@ from models.weapon_classifier import WeaponClassifierModel
 
 data_path = '../data/images'
 
-hyper_dict={'num_epochs': 4,
+hyper_dict={'num_epochs': 2,
     'batch_size': 32,
     'learning_rate': 0.0001,
     }

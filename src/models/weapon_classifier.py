@@ -30,8 +30,8 @@ class WeaponClassifierModel(object):
 
 
     def evaluate(self, test_dataset):
-        predictions = self.model.predict(test_dataset)
-        
+        predictions = self.model.predict(test_dataset, steps=1)
+
         test_loss, test_acc = self.model.evaluate(test_dataset, steps=1, verbose=2)
         print('Accuracy on test dataset: {}'.format(test_acc))
         # foundations.log_metric('Accuracy', float(test_acc))
