@@ -2,8 +2,8 @@ import cv2
 import os
 import pathlib
 
-IMAGES_PATH = pathlib.Path('../../data/raw/images')
-CLIPS_PATH = pathlib.Path('../../data/raw/clips')
+IMAGES_PATH = pathlib.Path('../../data/images')
+CLIPS_PATH = pathlib.Path('../../data/clips')
 NUM_FRAMES = 20
 DEVELOPMENT = True # if TRUE, will use only one clip and extract/save only 2 frames
 
@@ -66,7 +66,7 @@ if __name__ == "__main__":
         #save frames
         for f in frames:
             highest_image_number += 1
-            img_path = pathlib.Path('../../data/raw/images/'+weapon+'/'+str(highest_image_number).zfill(12)+'.jpg')
+            img_path = pathlib.Path('../../data/images/'+weapon+'/'+str(highest_image_number).zfill(12)+'.jpg')
             print('saving image {}'.format(img_path))
             cv2.imwrite(str(img_path), f)
         #close clip

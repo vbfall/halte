@@ -4,7 +4,7 @@ from data.data_pipeline import DataPipeline
 from models.weapon_classifier import WeaponClassifierModel
 # import foundations
 
-data_path = '../data/raw/images'
+data_path = '../data/images'
 BATCH_SIZE=32
 
 print('#### SET UP DATA PIPELINE ####')
