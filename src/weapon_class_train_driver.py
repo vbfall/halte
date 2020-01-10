@@ -10,7 +10,10 @@ hyper_dict={'num_epochs': 2,
     'batch_size': 64,
     'learning_rate': 0.001,
     'conv_layers': 2,
+    'conv_activation': 'relu',
     'dense_layers': 2,
+    'dense_activation': 'relu',
+    'dense_size': [96, 48],
     'decay': 1e-6
     }
 # hyper_dict = foundations.load_parameters()
