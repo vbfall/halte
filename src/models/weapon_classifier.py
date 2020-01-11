@@ -21,13 +21,13 @@ class WeaponClassifierModel(object):
                                             activation=self.hyper['conv_activation'],
                                             input_shape=input_shape))
             if self.hyper['pooling']:
-                self.model.add(kearas.layers.MaxPooling2D((2, 2)))
+                self.model.add(keras.layers.MaxPooling2D((2, 2)))
             for n in range(1, self.hyper['conv_layers']):
                 self.model.add(keras.layers.Conv2D(self.hyper['conv_filters'][n],
                                                 self.hyper['conv_sizes'][n],
                                                 activation=self.hyper['conv_activation']))
                 if self.hyper['pooling']:
-                    self.model.add(kearas.layers.MaxPooling2D((2, 2)))
+                    self.model.add(keras.layers.MaxPooling2D((2, 2)))
             self.model.add(keras.layers.Flatten())
         else:
             self.model.add(keras.layers.Flatten(input_shape=input_shape))

@@ -6,12 +6,12 @@ from models.weapon_classifier import WeaponClassifierModel
 
 data_path = '../data/images'
 
-hyper_dict={'num_epochs': 2,
-    'batch_size': 64,
-    'learning_rate': 0.001,
+hyper_dict={'num_epochs': 5,
+    'batch_size': 128,
+    'learning_rate': 0.0001,
     'conv_layers': 2,
     'conv_activation': 'relu',
-    'conv_filters': [32, 64],
+    'conv_filters': [8, 16],
     'conv_sizes': [(9, 9), (5, 5)],
     'pooling': True,
     'dense_layers': 1,
