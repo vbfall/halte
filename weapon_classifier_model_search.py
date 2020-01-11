@@ -47,5 +47,5 @@ num_jobs = 2
 for _ in range(num_jobs):
     hyperparameters = sample_hyperparameters(hyperparameter_ranges)
     foundations.submit(scheduler_config='scheduler',
-                    command='weapon_class_train_driver.py',
+                    command='src/weapon_class_train_driver.py',
                     params=hyperparameters)
