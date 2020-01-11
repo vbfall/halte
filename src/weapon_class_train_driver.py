@@ -9,12 +9,15 @@ data_path = '../data/images'
 hyper_dict={'num_epochs': 2,
     'batch_size': 64,
     'learning_rate': 0.001,
-    'conv_layers': 0,
+    'conv_layers': 2,
     'conv_activation': 'relu',
     'conv_filters': [32, 64],
-    'dense_layers': 2,
+    'conv_sizes': [(9, 9), (5, 5)],
+    'pooling': True,
+    'dense_layers': 1,
     'dense_activation': 'relu',
-    'dense_size': [96, 48],
+    'dense_size': [32, 16],
+    'opt': 0,
     'decay': 1e-6
     }
 # hyper_dict = foundations.load_parameters()
