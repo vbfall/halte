@@ -4,7 +4,7 @@ from tensorflow import keras
 from tensorflow.keras.callbacks import TensorBoard
 from tensorflow.keras.optimizers import RMSprop
 
-# import foundations
+import foundations
 
 class WeaponClassifierModel(object):
 
@@ -70,4 +70,4 @@ class WeaponClassifierModel(object):
 
         test_loss, test_acc = self.model.evaluate(test_dataset, steps=1, verbose=2)
         print('Accuracy on test dataset: {}'.format(test_acc))
-        # foundations.log_metric('Accuracy', float(test_acc))
+        foundations.log_metric('Accuracy', float(test_acc))

@@ -2,28 +2,28 @@ import numpy as np
 
 from data.data_pipeline import DataPipeline
 from models.weapon_classifier import WeaponClassifierModel
-# import foundations
-#
-# foundations.set_tensorboard_logdir('../logs')
+
+import foundations
+foundations.set_tensorboard_logdir('../logs')
 
 
 data_path = '../data/images'
 
-hyper_dict={'num_epochs': 5,
-    'batch_size': 128,
-    'learning_rate': 0.0001,
-    'conv_layers': 2,
-    'conv_activation': 'relu',
-    'conv_filters': [8, 16],
-    'conv_sizes': [(9, 9), (5, 5)],
-    'pooling': True,
-    'dense_layers': 1,
-    'dense_activation': 'relu',
-    'dense_size': [32, 16],
-    'opt': 0,
-    'decay': 1e-6
-    }
-# hyper_dict = foundations.load_parameters()
+# hyper_dict={'num_epochs': 5,
+#     'batch_size': 128,
+#     'learning_rate': 0.0001,
+#     'conv_layers': 2,
+#     'conv_activation': 'relu',
+#     'conv_filters': [8, 16],
+#     'conv_sizes': [(9, 9), (5, 5)],
+#     'pooling': True,
+#     'dense_layers': 1,
+#     'dense_activation': 'relu',
+#     'dense_size': [32, 16],
+#     'opt': 0,
+#     'decay': 1e-6
+#     }
+hyper_dict = foundations.load_parameters()
 
 
 print('#### SET UP DATA PIPELINE ####')
