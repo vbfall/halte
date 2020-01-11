@@ -34,13 +34,24 @@ def sample_hyperparameters(hyperparameter_ranges):
     return hyperparameters
 
 
-hyperparameter_ranges={'num_epochs': 4,
+hyperparameter_ranges={'num_epochs': 20,
     'batch_size': SearchSpace(16, 256, int),
     'learning_rate': SearchSpace(1e-5, 1e-2, float),
+    'conv_layers': SearchSpace(0, 3, int),
+    'conv_activation': 'relu',
+    'conv_filters': [4, 8, 16],
+    'conv_sizes': [(9, 9), (5, 5), (3, 3)],
+    'pooling': SearchSpace(0, 1, int),
+    'dense_layers': SearchSpace(0, 3, int),
+    'dense_activation': 'relu',
+    'dense_size': [64, 32, 16],
+    'opt': SearchSpace(0, 1, int),
     'decay': SearchSpace(1e-7, 1e-5, float),
     }
 
-num_jobs = 5
+num_jobs = 50
 for _ in range(num_jobs):
     hyperparameters = sample_hyperparameters(hyperparameter_ranges)
-    foundations.submit(scheduler_config='scheduler', command='driver.py', params=hyperparameters)#, stream_job_logs=True)
+    foundations.submit(scheduler_config='scheduler',
+                    command='weapon_class_train_driver.py',
+                    params=hyperparameters)

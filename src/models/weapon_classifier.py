@@ -1,6 +1,7 @@
 
 import tensorflow as tf
 from tensorflow import keras
+from tensorflow.keras.callbacks import TensorBoard
 from tensorflow.keras.optimizers import RMSprop
 
 # import foundations
@@ -43,7 +44,7 @@ class WeaponClassifierModel(object):
 
         print(self.model.summary())
 
-    def train(self, train_dataset, opt=0, STEPS_PER_EPOCH=2, epochs=3):
+    def train(self, train_dataset, opt=0, STEPS_PER_EPOCH=2):
 
         opt_array = ['adam',
             RMSprop(lr=self.hyper['learning_rate'], decay=self.hyper['decay'])
@@ -54,8 +55,14 @@ class WeaponClassifierModel(object):
             loss='sparse_categorical_crossentropy',
             metrics=['accuracy'])
 
+        log_dir = '../logs'
+        tensorboard_callback = TensorBoard(log_dir=log_dir, histogram_freq=1)
+
         print('Training model...')
-        self.model.fit(train_dataset, steps_per_epoch=STEPS_PER_EPOCH, epochs=epochs)
+        self.model.fit(train_dataset,
+                    steps_per_epoch=STEPS_PER_EPOCH,
+                    epochs=self.hyper['num_epochs'],
+                    callbacks=[tensorboard_callback])
 
 
     def evaluate(self, test_dataset):
