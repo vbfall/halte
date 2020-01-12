@@ -16,7 +16,7 @@ class SearchSpace:
         if self.type == int:
             return np.random.randint(self.min, self.max)
         elif self.type == float:
-            return round(np.random.uniform(self.min, self.max), 2)
+            return round(np.random.uniform(self.min, self.max), 7)
 
 
 def sample_hyperparameters(hyperparameter_ranges):
@@ -28,7 +28,7 @@ def sample_hyperparameters(hyperparameter_ranges):
     return hyperparameters
 
 
-hyperparameter_ranges={'num_epochs': 20,
+hyperparameter_ranges={'num_epochs': 3,
     'batch_size': SearchSpace(16, 256, int),
     'learning_rate': SearchSpace(1e-5, 1e-2, float),
     'conv_layers': SearchSpace(0, 3, int),
@@ -43,7 +43,8 @@ hyperparameter_ranges={'num_epochs': 20,
     'decay': SearchSpace(1e-7, 1e-5, float),
     }
 
-num_jobs = 2
+
+num_jobs = 3
 for _ in range(num_jobs):
     hyperparameters = sample_hyperparameters(hyperparameter_ranges)
     foundations.submit(scheduler_config='scheduler',

@@ -1,2 +1,13 @@
-project_name: 'halte'
+# Project config #
+project_name: 'test'
 log_level: INFO
+
+
+# Worker config #
+worker:
+  image: us.gcr.io/atlas-ce/worker:latest
+
+  volumes:
+    /c/users/vbfal/projects/halte-data:
+      bind: /data
+      mode: rw
