@@ -6,10 +6,6 @@ from models.weapon_classifier import WeaponClassifierModel
 import foundations
 # foundations.set_tensorboard_logdir('../logs')
 
-print('VVVVVVVVVVVVVVVVVVVVVVV')
-print('Currently using TF {}'.format(tf.__version__))
-
-
 data_path = 'c:\\users\\vbfal\\projects\\halte-data\\test' # works on Windows
 data_path = '/data/test' # works in F9s - see job.config.yaml
 
