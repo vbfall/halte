@@ -44,7 +44,7 @@ hyperparameter_ranges={'num_epochs': 3,
     }
 
 
-num_jobs = 3
+num_jobs = 2
 for _ in range(num_jobs):
     hyperparameters = sample_hyperparameters(hyperparameter_ranges)
     foundations.submit(scheduler_config='scheduler',
