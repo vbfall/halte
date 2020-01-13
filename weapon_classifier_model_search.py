@@ -28,7 +28,8 @@ def sample_hyperparameters(hyperparameter_ranges):
     return hyperparameters
 
 
-hyperparameter_ranges={'num_epochs': 3,
+hyperparameter_ranges={'dataset':'images',
+    'num_epochs': 25,
     'batch_size': SearchSpace(16, 256, int),
     'learning_rate': SearchSpace(1e-5, 1e-2, float),
     'conv_layers': SearchSpace(0, 3, int),
@@ -44,7 +45,7 @@ hyperparameter_ranges={'num_epochs': 3,
     }
 
 
-num_jobs = 2
+num_jobs = 30
 for _ in range(num_jobs):
     hyperparameters = sample_hyperparameters(hyperparameter_ranges)
     foundations.submit(scheduler_config='scheduler',

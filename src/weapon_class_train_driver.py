@@ -6,10 +6,8 @@ from models.weapon_classifier import WeaponClassifierModel
 import foundations
 # foundations.set_tensorboard_logdir('../logs')
 
-data_path = 'c:\\users\\vbfal\\projects\\halte-data\\test' # works on Windows
-data_path = '/data/test' # works in F9s - see job.config.yaml
-
-# hyper_dict={'num_epochs': 5,
+# hyper_dict={'dataset':'images',
+#     'num_epochs': 5,
 #     'batch_size': 128,
 #     'learning_rate': 0.0001,
 #     'conv_layers': 2,
@@ -23,8 +21,10 @@ data_path = '/data/test' # works in F9s - see job.config.yaml
 #     'opt': 0,
 #     'decay': 1e-6
 #     }
-hyper_dict = foundations.load_parameters()
+# hyper_dict = foundations.load_parameters()
 
+data_path = 'c:\\users\\vbfal\\projects\\halte-data\\'+hyper_dict['dataset'] # works on Windows
+data_path = '/data/'+hyper_dict['dataset'] # works in F9s - see job.config.yaml
 
 print('#### SET UP DATA PIPELINE ####')
 data_pipeline = DataPipeline(data_path)
