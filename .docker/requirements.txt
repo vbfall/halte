@@ -1,6 +1,6 @@
 tensorflow>=2.0.0
 pandas==0.24.2
 numpy
-opencv_python
+opencv_python>=4
 pillow
 scikit-learn

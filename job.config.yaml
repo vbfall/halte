@@ -1,11 +1,11 @@
 # Project config #
-project_name: 'test'
+project_name: 'test-custom-worker'
 log_level: INFO
 
 
 # Worker config #
 worker:
-  image: us.gcr.io/atlas-ce/worker:latest
+  image: halte:latest
 
   volumes:
     /c/users/vbfal/projects/halte-data:
