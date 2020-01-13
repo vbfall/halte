@@ -15,7 +15,7 @@ class DataPipeline(object):
     def __init__(self, data_path_string):
         print('\nInitializing data pipeline')
 
-        print('VVVVVVVVVVVVVVVVVVVVVVV')
+        print('---------------------------')
         print('Currently using TF {}'.format(tf.__version__))
         print('Eager execution? {}'.format(tf.executing_eagerly()))
         print('---------------------------')
