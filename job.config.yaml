@@ -1,5 +1,5 @@
 # Project config #
-project_name: 'test-custom-worker'
+project_name: 'halte'
 log_level: INFO
 
 
