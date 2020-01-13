@@ -9,21 +9,21 @@ import foundations
 data_path = 'c:\\users\\vbfal\\projects\\halte-data\\test' # works on Windows
 data_path = '/data/test' # works in F9s - see job.config.yaml
 
-hyper_dict={'num_epochs': 5,
-    'batch_size': 128,
-    'learning_rate': 0.0001,
-    'conv_layers': 2,
-    'conv_activation': 'relu',
-    'conv_filters': [8, 16],
-    'conv_sizes': [(9, 9), (5, 5)],
-    'pooling': True,
-    'dense_layers': 1,
-    'dense_activation': 'relu',
-    'dense_size': [32, 16],
-    'opt': 0,
-    'decay': 1e-6
-    }
-# hyper_dict = foundations.load_parameters()
+# hyper_dict={'num_epochs': 5,
+#     'batch_size': 128,
+#     'learning_rate': 0.0001,
+#     'conv_layers': 2,
+#     'conv_activation': 'relu',
+#     'conv_filters': [8, 16],
+#     'conv_sizes': [(9, 9), (5, 5)],
+#     'pooling': True,
+#     'dense_layers': 1,
+#     'dense_activation': 'relu',
+#     'dense_size': [32, 16],
+#     'opt': 0,
+#     'decay': 1e-6
+#     }
+hyper_dict = foundations.load_parameters()
 
 
 print('#### SET UP DATA PIPELINE ####')
