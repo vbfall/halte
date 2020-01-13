@@ -18,6 +18,7 @@ class DataPipeline(object):
         print('VVVVVVVVVVVVVVVVVVVVVVV')
         print('Currently using TF {}'.format(tf.__version__))
         print('Eager execution? {}'.format(tf.executing_eagerly()))
+        print('---------------------------')
 
         print('Grabbing images from {}'.format(data_path_string))
         self.data_dir = pathlib.Path(data_path_string)
@@ -84,12 +85,6 @@ class DataPipeline(object):
                 print('Loading test dataset.')
                 dataset_paths = self.test_list
             file_list_ds = tf.data.Dataset.from_tensor_slices(dataset_paths)
-
-            print('*************** DEBUG ************')
-            for f in file_list_ds.take(3):
-                print(f.numpy())
-            print(file_list_ds)
-            print('*************** DEBUG ************')
 
             print('Mapping preprocessing.')
             labeled_ds = file_list_ds.map(self._process_path, num_parallel_calls=AUTOTUNE)
