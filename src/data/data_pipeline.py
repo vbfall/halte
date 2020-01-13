@@ -42,16 +42,11 @@ class DataPipeline(object):
         train_list, test_list = self._split_nested_lists(class_nested_list, train_split)
         print('Split dataset of {} samples into {} train samples and {} test samples'.format(self.image_count, len(train_list), len(test_list)))
 
-        if (self.image_count == len(train_list) + len(test_list)):
-            # extract strings from paths (TF requires strings)
-            train_list = [str(file_path) for file_path in train_list]
-            test_list = [str(file_path) for file_path in test_list]
+        self.train_list = [str(file_path) for file_path in train_list]
+        self.test_list = [str(file_path) for file_path in test_list]
 
-            self.train_list = train_list
-            self.test_list = test_list
-            print('Train and test lists set')
-        else:
-            print('Data count mismatch; train and test lists not set')
+        if (self.image_count != len(self.train_list) + len(self.test_list)):
+            print('Data count mismatch; please check')
 
 
     def _split_nested_lists(self, nested_list, train_split):
