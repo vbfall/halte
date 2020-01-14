@@ -1,0 +1,8 @@
+# Data #
+# data_path: 'c:\\users\\vbfal\\projects\\halte-data\\images' # works on Windows
+data_path: '/data/images' # match address mounted on job.config.yaml if running on F9s
+
+
+# Model search #
+model_search:
+  num_jobs: 10

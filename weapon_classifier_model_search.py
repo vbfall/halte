@@ -1,9 +1,11 @@
 
 import os
 os.environ['FOUNDATIONS_COMMAND_LINE'] = 'True'
+
+import copy
 import foundations
 import numpy as np
-import copy
+import yaml
 
 class SearchSpace:
 
@@ -28,8 +30,12 @@ def sample_hyperparameters(hyperparameter_ranges):
     return hyperparameters
 
 
-hyperparameter_ranges={'dataset':'images',
-    'num_epochs': 25,
+with open('./src/config/config.yaml') as file:
+    config = yaml.load(file)
+
+
+hyperparameter_ranges={
+    'num_epochs': 10,
     'batch_size': SearchSpace(16, 256, int),
     'learning_rate': SearchSpace(1e-5, 1e-2, float),
     'conv_layers': SearchSpace(0, 3, int),
@@ -45,8 +51,7 @@ hyperparameter_ranges={'dataset':'images',
     }
 
 
-num_jobs = 30
-for _ in range(num_jobs):
+for _ in range(config.get('model_search',{}).get('num_jobs')):
     hyperparameters = sample_hyperparameters(hyperparameter_ranges)
     foundations.submit(scheduler_config='scheduler',
                     command='src/weapon_class_train_driver.py',

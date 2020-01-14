@@ -1,7 +1,11 @@
 import numpy as np
+import yaml
 
 from data.data_pipeline import DataPipeline
 from models.weapon_classifier import WeaponClassifierModel
+
+with open('./src/config/config.yaml') as file:
+    config = yaml.load(file)
 
 import foundations
 # foundations.set_tensorboard_logdir('../logs')
@@ -21,13 +25,10 @@ import foundations
 #     'opt': 0,
 #     'decay': 1e-6
 #     }
-# hyper_dict = foundations.load_parameters()
-
-data_path = 'c:\\users\\vbfal\\projects\\halte-data\\'+hyper_dict['dataset'] # works on Windows
-data_path = '/data/'+hyper_dict['dataset'] # works in F9s - see job.config.yaml
+hyper_dict = foundations.load_parameters()
 
 print('#### SET UP DATA PIPELINE ####')
-data_pipeline = DataPipeline(data_path)
+data_pipeline = DataPipeline(config.get('data_path'))
 data_pipeline.split_data()
 
 train_dataset = data_pipeline.load_dataset()
