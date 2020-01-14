@@ -26,7 +26,9 @@ worker:
 
 ### Add your data
 
-- Mount data address into docker image through `job.config.yaml`:
+To work with Foundations, it is better to leave data outside of the code repository, otherwise Foundations will try to pack all the data into the job, quickly overflowing memory (or disk).
+
+To mount the data directory into the docker image, update `job.config.yaml` with:
 ```
 worker:
   (...)
@@ -35,3 +37,12 @@ worker:
       bind: /data
       mode: rw
 ```
+### Before submitting Foundations jobs
+
+Do **NOT** submit from within the full code repo.  Copy the repo to a new location, and then erase unnecessary folders (specially the first two, which tend to be larger):
+- .git
+- .ipynb_checkpoints
+- .docker
+- spikes
+- references
+Until Foundations has a _ignore_ function, these will be packaged with jobs, consuming space needlessly and slowing down job submission.
