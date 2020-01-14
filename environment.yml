@@ -1,7 +1,8 @@
 name: halte
 dependencies:
   - python=3.7.*
-  - tensorflow=2.*
+  - pyyaml>=5.1
+  - tensorflow>=2.0
   - pandas=0.24.2
   - numpy
   - opencv=3.4.2
