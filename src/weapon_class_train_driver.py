@@ -5,27 +5,17 @@ from data.data_pipeline import DataPipeline
 from models.weapon_classifier import WeaponClassifierModel
 
 with open('./src/config/config.yaml') as file:
-    config = yaml.load(file)
+    config = yaml.load(file, Loader=yaml.FullLoader)
 
 import foundations
 # foundations.set_tensorboard_logdir('../logs')
 
-# hyper_dict={'dataset':'images',
-#     'num_epochs': 5,
-#     'batch_size': 128,
-#     'learning_rate': 0.0001,
-#     'conv_layers': 2,
-#     'conv_activation': 'relu',
-#     'conv_filters': [8, 16],
-#     'conv_sizes': [(9, 9), (5, 5)],
-#     'pooling': True,
-#     'dense_layers': 1,
-#     'dense_activation': 'relu',
-#     'dense_size': [32, 16],
-#     'opt': 0,
-#     'decay': 1e-6
-#     }
-hyper_dict = foundations.load_parameters()
+if config.get('model_search',{}).get('model_search'):
+    hyper_dict = foundations.load_parameters()
+else:
+    hyper_dict = config.get('hyperparameters')
+    for k, v in hyper_dict.items():
+        foundations.log_param(k, v)
 
 print('#### SET UP DATA PIPELINE ####')
 data_pipeline = DataPipeline(config.get('data_path'))

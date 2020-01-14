@@ -31,7 +31,7 @@ def sample_hyperparameters(hyperparameter_ranges):
 
 
 with open('./src/config/config.yaml') as file:
-    config = yaml.load(file)
+    config = yaml.load(file, Loader=yaml.FullLoader)
 
 
 hyperparameter_ranges={

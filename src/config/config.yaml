@@ -1,8 +1,23 @@
-# Data #
 # data_path: 'c:\\users\\vbfal\\projects\\halte-data\\images' # works on Windows
-data_path: '/data/images' # match address mounted on job.config.yaml if running on F9s
+data_path: '/data/test' # match address mounted on job.config.yaml if running on F9s
+
+# used only if model_search.model_search == False
+hyperparameters:
+    'num_epochs': 5
+    'batch_size': 128
+    'learning_rate': 0.0001
+    'conv_layers': 2
+    'conv_activation': 'relu'
+    'conv_filters': [8, 16]
+    'conv_sizes': [!!python/tuple [9, 9], !!python/tuple [5, 5]]
+    'pooling': True
+    'dense_layers': 1
+    'dense_activation': 'relu'
+    'dense_size': [32, 16]
+    'opt': 0
+    'decay': !!python/float 1e-6
 
 
-# Model search #
 model_search:
-  num_jobs: 10
+  model_search: True
+  num_jobs: 3
