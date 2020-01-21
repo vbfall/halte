@@ -30,7 +30,7 @@ def sample_hyperparameters(hyperparameter_ranges):
     return hyperparameters
 
 
-with open('./src/config/config.yaml') as file:
+with open('./src/config/weapon_classifier.config.yaml') as file:
     config = yaml.load(file, Loader=yaml.FullLoader)
 
 
