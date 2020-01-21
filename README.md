@@ -21,11 +21,11 @@ This project is intended as a learning tool for the fencing community (and also 
 ## High level architecture (plan)
 
 The system is dividided in several stages with different functions:
-1. **en_garde**: finds the fencers in an images
-1. **prets**: leverages the previous stage to determine basic features of the video (e.g. which weapon is being used?)
-1. **allez**: crops the video around touches (valid or not)
-1. **halte**: leverages all previous stages to determine which fencer gets a point, if any
-1. **sur_la_prep**: determines the fencing phrase
+1. **fencer_finder**: finds the fencers in an images
+1. **weapon_classifier**: leverages the previous stage to determine basic features of the video (e.g. which weapon is being used?)
+1. **touch_finder**: crops the video around touches (valid or not)
+1. **point_assignment**: leverages all previous stages to determine which fencer gets a point, if any
+1. **fencing_phrase**: determines the fencing phrase
 
 
 ## Many thanks to...
