@@ -1,0 +1,12 @@
+# data_path: 'c:\\users\\vbfal\\projects\\halte-data\\images' # works on Windows
+data_path: '/data/test' # match address mounted on job.config.yaml if running on F9s
+
+# used only if model_search.model_search == False
+hyperparameters:
+    'num_epochs': 5
+    'input_shape': [128, 128, 3]
+    'output_channels': 3
+    'batch_size': 128
+    'buffer_size': 64
+    'val_subsplits': 5
+    'learning_rate': 0.001

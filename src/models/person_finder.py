@@ -1,19 +1,27 @@
 import tensorflow as tf
 
-from tensorflow_examples.models.pix2pix import pix2pix # U-Net upsampler is based on Google pix2pix model
+import src.models.pix2pix as pix2pix # U-Net upsampler is based on Google pix2pix model
 
 
 class PersonFinder(object):
     # Defines a U-Net architecture model for image segmentation
 
-    def __init__(self, input_shape, hyperparameters, output_channels=3):
+    def __init__(self, hyperparameters):
         print('Registering hyperparameters')
         self.hyper = hyperparameters
 
         print('Creating keras model...')
-        self.model = unet_model(output_channels)
+        self.model = self.unet_model(self.hyper.get('output_channels', 3))
 
-        print(self.model.summary())
+        self.model.compile(optimizer='adam',
+                        loss='sparse_categorical_crossentropy',
+                        metrics=['accuracy'])
+
+        tf.keras.utils.plot_model(self.model, show_shapes=True)
+
+        # print(self.model.summary())
+
+
 
     def down_stack(self):
         print("Setting up down sampling stack")
@@ -47,10 +55,10 @@ class PersonFinder(object):
         return up_stack
 
 
-    def unet_model(self, output_channels):
+    def unet_model(self):
 
         print("Setting up input layer")
-        inputs = tf.keras.layers.Input(shape=[128, 128, 3])
+        inputs = tf.keras.layers.Input(shape=self.hyperparameters.get('input_shape', [128, 128, 3]))
         x = inputs
 
         down_sample = self.down_stack()
@@ -71,8 +79,9 @@ class PersonFinder(object):
 
         print("Setting up final output layer")
         last = tf.keras.layers.Conv2DTranspose(
-            output_channels, 3, strides=2,
-            padding='same', activation='softmax')  # 64x64 -> 128x128
+            self.hyperparameters.get('output_channels', 3),
+            3, strides=2, padding='same', activation='softmax'
+            )  # 64x64 -> 128x128
 
         x = last(x)
 
