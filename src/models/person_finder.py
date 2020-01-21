@@ -11,7 +11,7 @@ class PersonFinder(object):
         self.hyper = hyperparameters
 
         print('Creating keras model...')
-        self.model = self.unet_model(self.hyper.get('output_channels', 3))
+        self.model = self.unet_model()
 
         self.model.compile(optimizer='adam',
                         loss='sparse_categorical_crossentropy',
@@ -19,13 +19,15 @@ class PersonFinder(object):
 
         tf.keras.utils.plot_model(self.model, show_shapes=True)
 
-        # print(self.model.summary())
+        print(self.model.summary())
 
 
 
     def down_stack(self):
         print("Setting up down sampling stack")
-        base_model = tf.keras.applications.MobileNetV2(input_shape=[128,128,3], include_top=False)
+        base_model = tf.keras.applications.MobileNetV2(
+                    input_shape=self.hyper.get('input_shape', [128, 128, 3]),
+                    include_top=False)
 
         print("Picking layers to activate")
         layer_names = [
@@ -58,7 +60,7 @@ class PersonFinder(object):
     def unet_model(self):
 
         print("Setting up input layer")
-        inputs = tf.keras.layers.Input(shape=self.hyperparameters.get('input_shape', [128, 128, 3]))
+        inputs = tf.keras.layers.Input(shape=self.hyper.get('input_shape', [128, 128, 3]))
         x = inputs
 
         down_sample = self.down_stack()
@@ -68,7 +70,7 @@ class PersonFinder(object):
         x = skips[-1]
         skips = reversed(skips[:-1])
 
-        up_sample = up_stack()
+        up_sample = self.up_stack()
 
         print("Assembling up sampling and skip connections")
         # Upsampling and establishing the skip connections
@@ -79,7 +81,7 @@ class PersonFinder(object):
 
         print("Setting up final output layer")
         last = tf.keras.layers.Conv2DTranspose(
-            self.hyperparameters.get('output_channels', 3),
+            self.hyper.get('output_channels', 3),
             3, strides=2, padding='same', activation='softmax'
             )  # 64x64 -> 128x128
 
