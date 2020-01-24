@@ -24,7 +24,7 @@ data_pipeline.split_data()
 train_dataset = data_pipeline.load_dataset()
 train_dataset = data_pipeline.prepare_for_training(train_dataset, batch_size=hyper_dict['batch_size'])
 
-test_dataset = data_pipeline.load_dataset(train=False)
+test_dataset = data_pipeline.load_dataset(test=True)
 test_dataset = data_pipeline.prepare_for_training(test_dataset, batch_size=hyper_dict['batch_size'])
 
 STEPS_PER_EPOCH = int(np.ceil(data_pipeline.image_count/hyper_dict['batch_size']))
