@@ -70,20 +70,21 @@ class DataPipeline(object):
         print('Will resize images to ({}, {})'.format(self.IMG_WIDTH, self.IMG_HEIGHT))
 
         if not self.train_list:
-            print('Dataset not split into train / test. Please provide split then retry.')
-            return None
+            print('Dataset not split locally; using all images provided and hoping you split it before.')
+            dataset_paths = str(self.data_dir/'*/*')
         else:
             if train:
-                print('Loading train dataset.')
+                print('Loading train split.')
                 dataset_paths = self.train_list
             else:
-                print('Loading test dataset.')
+                print('Loading test split.')
                 dataset_paths = self.test_list
-            file_list_ds = tf.data.Dataset.from_tensor_slices(dataset_paths)
 
-            print('Mapping preprocessing.')
-            labeled_ds = file_list_ds.map(self._process_path, num_parallel_calls=AUTOTUNE)
-            return labeled_ds
+        file_list_ds = tf.data.Dataset.from_tensor_slices(dataset_paths)
+
+        print('Mapping preprocessing.')
+        labeled_ds = file_list_ds.map(self._process_path, num_parallel_calls=AUTOTUNE)
+        return labeled_ds
 
 
     def prepare_for_training(self, ds, cache=True, shuffle_buffer_size=1000, batch_size=32):
