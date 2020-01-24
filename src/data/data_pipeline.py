@@ -9,7 +9,7 @@ SEED = 42
 
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 
-class DataPipeline(object):
+class ClassificationDataPipeline(object):
     # Assumes data directory structure: data_path_string/class/sample.jpb
 
     def __init__(self, data_path_string):

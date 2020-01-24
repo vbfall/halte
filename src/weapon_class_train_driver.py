@@ -1,7 +1,7 @@
 import numpy as np
 import yaml
 
-from data.data_pipeline import DataPipeline
+from data.data_pipeline import ClassificationDataPipeline
 from models.weapon_classifier import WeaponClassifierModel
 
 with open('./src/config/weapon_classifier.config.yaml') as file:
