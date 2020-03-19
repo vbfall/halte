@@ -31,7 +31,6 @@ The system is dividided in several stages with different functions:
 ## Many thanks to...
 
 For providing huge amounts of data (images and videos):
-- Carla Scalabrin (BRA)
 - Fernando Scavasin (BRA)
 
 _more to come..._
