@@ -1,6 +1,6 @@
-# Directory containing training & test data
+# Directories containing data, logs
 data/**
-notebooks/**
+logs/**
 
 # Confidential references
 references/confidential
