@@ -1,10 +1,7 @@
 
 import tensorflow as tf
 from tensorflow import keras
-# from tensorflow.keras.callbacks import TensorBoard
 from tensorflow.keras.optimizers import RMSprop
-
-import foundations
 
 class WeaponClassifierModel(object):
 
@@ -55,9 +52,6 @@ class WeaponClassifierModel(object):
             loss='sparse_categorical_crossentropy',
             metrics=['accuracy'])
 
-        # log_dir = '../logs'
-        # tensorboard_callback = TensorBoard(log_dir=log_dir, histogram_freq=1)
-
         print('Training model...')
         self.model.fit(train_dataset,
                     steps_per_epoch=STEPS_PER_EPOCH,
@@ -71,4 +65,3 @@ class WeaponClassifierModel(object):
 
         test_loss, test_acc = self.model.evaluate(test_dataset, steps=1)
         print('Accuracy on test dataset: {}'.format(test_acc))
-        foundations.log_metric('Accuracy', float(test_acc))

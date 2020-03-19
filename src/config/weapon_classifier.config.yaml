@@ -1,5 +1,5 @@
-# data_path: 'c:\\users\\vbfal\\projects\\halte-data\\images' # works on Windows
-data_path: '/data/test' # match address mounted on job.config.yaml if running on F9s
+data_path: 'c:\\users\\vbfal\\projects\\halte-data\\images' # works on Windows
+# data_path: '/data/test' # match address mounted on job.config.yaml if running on F9s
 
 # used only if model_search.model_search == False
 hyperparameters:
