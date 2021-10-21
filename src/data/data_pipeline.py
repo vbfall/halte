@@ -32,8 +32,8 @@ class ImagePipeline(object):
         # Repeat forever
         ds = ds.repeat()
         ds = ds.batch(batch_size)
-        # `prefetch` lets the dataset fetch batches in the background while the model
-        # is training.
+        # `prefetch` lets the dataset fetch batches in
+        # the background while the model is training.
         ds = ds.prefetch(buffer_size=AUTOTUNE)
         return ds
 
